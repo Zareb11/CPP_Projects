@@ -40,7 +40,7 @@ class Student {
                 }
                 cout << " - " << mark_ave/subject.second.size() << endl;
             }
-            cout << "-------------------" << endl;
+            //cout << "-------------------" << endl;
         }
 };
 
@@ -59,6 +59,19 @@ void preorderPrint(Node * head){
     {   
         traverser->student->calculate_ave_subjects();
         traverser = traverser->next;
+    }
+}
+
+void print_all_students_information(Node *head){
+    Node* iterator = head;
+    while(iterator != nullptr)
+    {
+        cout << "Name - " << iterator->student->Name << endl;
+        cout << "Major - " << iterator->student->DegreeMajor << endl;
+        cout << "Grade averages - " << endl;
+        iterator->student->calculate_ave_subjects();
+        iterator = iterator->next;
+        cout << "-------------" << endl;
     }
 }
 
@@ -107,8 +120,10 @@ int main()
     tail->next = node;
     tail = node;
     //---------------------------------------------------------------------------------------------
-    student1.calculate_ave_subjects();
-    student2.calculate_ave_subjects();
+    //student1.calculate_ave_subjects();
+    //student2.calculate_ave_subjects();
+    //preorderPrint(head);
+    print_all_students_information(head);
 
 
 
