@@ -2,47 +2,10 @@
 #include <string>
 #include <list>
 #include <map>
+#include "Student.h"
 
 using namespace std;
 
-
-class Student {
-    public:
-        string Name;
-        int StudentNo;
-        string DegreeMajor;
-        list<string> Subjects;
-        map<string, list<float>> SubjectMarks;
-
-        void print_subjects(){
-            for(auto subject:Subjects)
-            {
-                cout << subject << "\n";
-            }
-        }
-        Student(string name, int studentNo, string degreeMajor, list<string> subjects, map<string, list<float>> subjectMarks)
-        {
-            Name = name;
-            StudentNo = studentNo;
-            DegreeMajor = degreeMajor;
-            Subjects = subjects;
-            SubjectMarks = subjectMarks;
-        }
-        void calculate_ave_subjects(){
-            
-            for(auto subject: SubjectMarks)
-            {   
-                float mark_ave = 0;
-                cout << subject.first;
-                for(auto mark: subject.second)
-                {
-                    mark_ave = mark_ave + mark;
-                }
-                cout << " - " << mark_ave/subject.second.size() << endl;
-            }
-            //cout << "-------------------" << endl;
-        }
-};
 
 
 class Node {
@@ -68,7 +31,7 @@ void print_all_students_information(Node *head){
     {
         cout << "Name - " << iterator->student->Name << endl;
         cout << "Major - " << iterator->student->DegreeMajor << endl;
-        cout << "Grade averages - " << endl;
+        cout << "Grade averages:  " << endl;
         iterator->student->calculate_ave_subjects();
         iterator = iterator->next;
         cout << "-------------" << endl;
@@ -79,7 +42,6 @@ void print_all_students_information(Node *head){
 
 int main()
 {
-    //---------------------------------------------------------------------------------------------
     list<string> subjects = {"Computer Science", "Physics", "Mathematics"};
     list<float> cs_marks { 47, 51, 67, 72, 87 };
     list<float> math_marks { 67, 70, 81, 44, 41 };
@@ -89,8 +51,6 @@ int main()
     subject_marks.insert(pair<string, list<float>>("Mathematics", math_marks));
     subject_marks.insert(pair<string, list<float>>("Physics", phy_marks));
     Student student1 = Student("Jacob Witbooi", 3579072, "Computer Science", subjects, subject_marks);
-    //student1.print_subjects();
-    //student1.calculate_ave_subjects();
     //---------------------------------------------------------------------------------------------
     list<string> subjects2 = {"Accounting", "Economics", "Commericial Law"};
     list<float> acc_marks { 77, 79, 67, 71, 74 };
@@ -100,10 +60,9 @@ int main()
     subject_marks2.insert(pair<string, list<float>>("Accounting", cs_marks));
     subject_marks2.insert(pair<string, list<float>>("Economics", math_marks));
     subject_marks2.insert(pair<string, list<float>>("Commericial Law", phy_marks));
-    Student student2 = Student("Gdowinn Isaacs", 3579072, "Accounting", subjects2, subject_marks2);
-    //---------------------------------------------------------------------------------------------
-    Node* head;
-    Node* tail;
+    Student student2 = Student("Godwinn Isaacs", 3579072, "Accounting", subjects2, subject_marks2);
+    Node* head = new Node();
+    Node* tail = new Node();
     //---------------------------------------------------------------------------------------------
     Node* node = new Node();
     node->student = &student1;
@@ -119,15 +78,7 @@ int main()
     node->prev = tail;
     tail->next = node;
     tail = node;
-    //---------------------------------------------------------------------------------------------
-    //student1.calculate_ave_subjects();
-    //student2.calculate_ave_subjects();
-    //preorderPrint(head);
     print_all_students_information(head);
-
-
-
-
 
     return 0;
 }
